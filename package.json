@@ -1,6 +1,6 @@
 {
   "name": "@dbryantm/github-package-test",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Test for working with Github Packages.",
   "repository": {
     "type": "git",
@@ -10,20 +10,23 @@
   "author": "dbryantm",
   "type": "module",
   "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
     "build": "vite build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest",
+    "ci": "vitest"
   },
   "devDependencies": {
+    "alias-hq": "^4.0.0",
     "eslint": "^9.39.1",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3",
     "vite": "^7.2.4",
-    "vite-plugin-dts": "^4.5.4"
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^4.0.12"
   }
 }

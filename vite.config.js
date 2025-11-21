@@ -1,5 +1,6 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import dts from 'vite-plugin-dts'
+import hq from 'alias-hq'
 
 export default defineConfig({
   build: {
@@ -8,10 +9,21 @@ export default defineConfig({
       entry: 'src/index.ts',
       formats: ['es', 'cjs'],
       fileName: (format) => {
-        const ext = format === 'cjs' ? 'cjs' : 'mjs'
+        let ext = 'js'
+
+        if (format === 'cjs') ext = 'cjs'
+
         return `index.${ext}`
       },
     },
   },
   plugins: [dts({ rollupTypes: true })],
+  resolve: {
+    alias: hq.get('rollup'),
+  },
+  test: {
+    include: ['src/**/*.test.ts'],
+    restoreMocks: true,
+    // setupFiles: ['./vitest.setup.ts'],
+  },
 })
