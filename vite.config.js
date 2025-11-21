@@ -5,6 +5,7 @@ import hq from 'alias-hq'
 export default defineConfig({
   build: {
     bundle: true,
+    emptyOutDir: true,
     lib: {
       entry: 'src/index.ts',
       formats: ['es', 'cjs'],
