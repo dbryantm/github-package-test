@@ -1,6 +1,6 @@
 {
   "name": "@dbryantm/github-package-test",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Test for working with Github Packages.",
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "ci": "vitest"
   },
   "devDependencies": {
+    "@microsoft/api-extractor": "^7.55.0",
     "alias-hq": "^4.0.0",
     "eslint": "^9.39.1",
     "prettier": "^3.6.2",

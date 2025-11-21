@@ -4,6 +4,9 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "bundler",
     "strict": true
   }
 }
