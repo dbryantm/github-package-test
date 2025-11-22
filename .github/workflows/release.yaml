@@ -34,10 +34,10 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      - name: Publish package
-        run: pnpm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Publish package
+      #   run: pnpm publish
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create GitHub Release
         id: create_release
