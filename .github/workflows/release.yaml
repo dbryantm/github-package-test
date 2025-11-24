@@ -1,0 +1,61 @@
+name: Publish package to GitHub Packages
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      # Setup .npmrc file to publish to GitHub Packages
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+          registry-url: "https://npm.pkg.github.com"
+          # Defaults to the user or organization that owns the workflow file
+          scope: "@dbryantm"
+
+      # - name: Configure .npmrc
+      #   run: echo "//npm.pkg.github.com/:_authToken=${{ github.token }}" > ~/.npmrc
+
+      - name: Corepack enable
+        id: corepack-enable
+        run: corepack enable
+
+      - name: Get cache directory
+        id: cache-path
+        run: echo "pnpm_cache=$(pnpm store path)" >> $GITHUB_ENV
+
+      - name: Restore dependencies
+        id: restore-dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.cache-path.outputs.pnpm_cache }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        if: steps.restore-dependencies.outputs.cache-hit != 'true'
+
+      - name: Cache dependencies
+        id: cache-dependencies
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ steps.cache-path.outputs.pnpm_cache }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Publish package
+        run: pnpm publish --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ github.token }}
