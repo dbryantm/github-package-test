@@ -7,15 +7,19 @@ export default defineConfig({
     bundle: true,
     emptyOutDir: true,
     lib: {
-      entry: 'src/index.ts',
-      formats: ['es', 'cjs'],
-      fileName: (format) => {
-        let ext = 'js'
-
-        if (format === 'cjs') ext = 'cjs'
-
-        return `index.${ext}`
+      // entry: 'src/index.ts',
+      entry: {
+        index: 'src/index.ts',
+        second: 'src/second.ts',
       },
+      formats: ['es', 'cjs'],
+      // fileName: (format, entry) => {
+      //   let ext = 'js'
+
+      //   if (format === 'cjs') ext = 'cjs'
+
+      //   return `${entry}.${ext}`
+      // },
     },
   },
   plugins: [dts({ bundleTypes: true, rollupTypes: true })],
