@@ -48,14 +48,13 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-        if: steps.restore-dependencies.outputs.cache-hit != 'true'
 
-      - name: Cache dependencies
-        id: cache-dependencies
-        uses: actions/cache/save@v4
-        with:
-          path: ${{ steps.get-cache-path.outputs.PNPM_CACHE }}
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+      # - name: Cache dependencies
+      #   id: cache-dependencies
+      #   uses: actions/cache/save@v4
+      #   with:
+      #     path: ${{ steps.get-cache-path.outputs.PNPM_CACHE }}
+      #     key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Build
         run: pnpm run build
