@@ -1,6 +1,6 @@
 {
   "name": "@dbryantm/github-package-test",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Test for working with Github Packages.",
   "repository": {
     "type": "git",
@@ -12,7 +12,9 @@
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [],
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
