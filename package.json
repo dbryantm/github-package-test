@@ -1,6 +1,6 @@
 {
   "name": "@dbryantm/github-package-test",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Test for working with Github Packages.",
   "repository": {
     "type": "git",
