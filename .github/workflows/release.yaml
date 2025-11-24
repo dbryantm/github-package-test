@@ -31,13 +31,13 @@ jobs:
 
       - name: Get cache directory
         id: cache-path
-        run: echo "pnpm_cache=$(pnpm store path)" >> $GITHUB_ENV
+        run: echo "PNPM_CACHE=$(pnpm store path)" >> $GITHUB_OUTPUT
 
       - name: Restore dependencies
         id: restore-dependencies
         uses: actions/cache@v4
         with:
-          path: ${{ steps.cache-path.outputs.pnpm_cache }}
+          path: ${{ steps.cache-path.outputs.PNPM_CACHE }}
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: ${{ runner.os }}-pnpm-
 
@@ -49,7 +49,7 @@ jobs:
         id: cache-dependencies
         uses: actions/cache/save@v4
         with:
-          path: ${{ steps.cache-path.outputs.pnpm_cache }}
+          path: ${{ steps.cache-path.outputs.PNPM_CACHE }}
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Build
