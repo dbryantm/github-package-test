@@ -12,9 +12,16 @@
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "exports": {
+    ".": {
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./second": {
+      "default": "./dist/second.js",
+      "types": "./dist/second.d.ts"
+    }
+  },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
