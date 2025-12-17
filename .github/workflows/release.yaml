@@ -24,7 +24,7 @@ jobs:
 
       - id: setup-npmrc
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ github.token }}" >> ./.npmrc
+          echo -e "\n//npm.pkg.github.com/:_authToken=${{ github.token }}" >> ./.npmrc
           cat ./.npmrc
 
       - id: pnpm-store-path
